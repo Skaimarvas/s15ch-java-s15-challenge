@@ -1,4 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
+
+/**Notlar:
+ * Author constructor'unda this.books = new ArrayList<>(); oluşturmadığım
+ * için nullPointer hatası aldım.
+ */
+
 
 public class Author extends Person{
 
@@ -6,6 +13,7 @@ public class Author extends Person{
 
     public Author(String name, String lastname) {
         super(name, lastname);
+        this.books = new ArrayList<>();
 
     }
 
@@ -13,9 +21,16 @@ public class Author extends Person{
         books.add(book);
     }
 
-    public void showBook(List<Book> books){
+    public void showBook(){
+
         for(Book book: books){
-            System.out.println("Book: " + book);
+            System.out.println("Book: " + book.get_title());
+            System.out.println("Author: " + book.getAuthor().getName() + " " + book.getAuthor().getLastname());
+            System.out.println("Edition: " + book.getEdition());
+            System.out.println("Status: " + book.getStatus());
+            System.out.println("Price: " + book.getPrice());
+            System.out.println("Date of Purchase: " + book.getDateOfPurchase());
+
         }
     }
     @Override

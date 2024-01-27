@@ -31,6 +31,21 @@ public class Book {
 
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public String getEdition() {
+        return edition;
+    }
+
+    public String getDateOfPurchase() {
+        return dateOfPurchase;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
     //reader oluşturduğunda getOwner methodu yaz.
 
 
