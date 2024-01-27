@@ -21,6 +21,7 @@ public class Book {
         this.dateOfPurchase = dateOfPurchase;
     }
 
+
     public String get_title(){
         return name;
     }
@@ -54,7 +55,7 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return book_ID == book.book_ID && Double.compare(price, book.price) == 0 && Objects.equals(author, book.author) && Objects.equals(name, book.name) && status == book.status && Objects.equals(edition, book.edition) && Objects.equals(dateOfPurchase, book.dateOfPurchase);
+        return book_ID == book.book_ID ;
     }
 
     @Override

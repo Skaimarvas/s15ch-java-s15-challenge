@@ -5,6 +5,6 @@ public class Main {
         stephenKings.newBook(theShining);
         System.out.println("____________Book________________");
         stephenKings.showBook();
-
+        stephenKings.whoYouAre();
     }
 }

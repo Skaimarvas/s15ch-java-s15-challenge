@@ -24,18 +24,20 @@ public class Author extends Person{
     public void showBook(){
 
         for(Book book: books){
+            System.out.println("___________________________________________________");
             System.out.println("Book: " + book.get_title());
             System.out.println("Author: " + book.getAuthor().getName() + " " + book.getAuthor().getLastname());
             System.out.println("Edition: " + book.getEdition());
-            System.out.println("Status: " + book.getStatus());
+            System.out.println("Status: " + book.getStatus().getDescription());
             System.out.println("Price: " + book.getPrice());
             System.out.println("Date of Purchase: " + book.getDateOfPurchase());
+            System.out.println("__________________________________________________");
 
         }
     }
     @Override
     public void whoYouAre() {
-        System.out.println("Person is: " + getClass().getSimpleName() + ": " + getName());
+        System.out.println("Person is " + getClass().getSimpleName() + ": " + getName() + " " + getLastname());
     }
 
 
