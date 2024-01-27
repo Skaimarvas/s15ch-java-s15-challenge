@@ -1,7 +1,8 @@
+import java.util.Comparator;
 import java.util.Objects;
 
-public class Book {
-    private long book_ID;
+public class Book implements Comparable<Book> {
+    private int book_ID;
     private Author author;
     private String name;
     private double price;
@@ -11,7 +12,7 @@ public class Book {
 
     private String dateOfPurchase;
 
-    public Book(long book_ID, Author author, String name, double price, Status status, String edition, String dateOfPurchase) {
+    public Book(int book_ID, Author author, String name, double price, Status status, String edition, String dateOfPurchase) {
         this.book_ID = book_ID;
         this.author = author;
         this.name = name;
@@ -21,6 +22,13 @@ public class Book {
         this.dateOfPurchase = dateOfPurchase;
     }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public long getBook_ID() {
+        return book_ID;
+    }
 
     public String get_title(){
         return name;
@@ -74,5 +82,10 @@ public class Book {
                 ", edition='" + edition + '\'' +
                 ", dateOfPurchase='" + dateOfPurchase + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        return Integer.valueOf(o.book_ID).compareTo(book_ID);
     }
 }

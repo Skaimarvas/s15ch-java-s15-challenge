@@ -2,12 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**Notlar:
+ * Okuyucunun kitap ödünç alma limiti 5 olmalı
+ * Sistemden bir kitap alındığında kitabı alan kullanıcıya bir fatura kesilmelidir.
+ *
+ */
+
 public class Reader extends Person {
 
     private List<Book> purchasedBooks;
     private List<Book> borrowedBooks;
 
-    public Reader(String name, String lastname, List<Book> books) {
+    public Reader(String name, String lastname) {
         super(name, lastname);
         this.purchasedBooks = new ArrayList<>();
         this.borrowedBooks = new ArrayList<>();
@@ -33,7 +39,7 @@ public class Reader extends Person {
 
     public void showBook(){
         System.out.println("_________Purchased_Book______________");
-        if(purchasedBooks != null){
+        if(!purchasedBooks.isEmpty()){
             for (Book book: purchasedBooks){
                 System.out.println("Book: " + book);
             }
@@ -42,7 +48,7 @@ public class Reader extends Person {
         }
 
         System.out.println("_________Borrowed_Book_______________");
-        if(borrowedBooks != null){
+        if(!borrowedBooks.isEmpty()){
             for (Book book: borrowedBooks){
                 System.out.println("Book: " + book);
             }
