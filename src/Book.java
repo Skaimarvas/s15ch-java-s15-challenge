@@ -21,9 +21,15 @@ public class Book implements Comparable<Book> {
         this.edition = edition;
         this.dateOfPurchase = dateOfPurchase;
     }
-
+    public Book(){
+        System.out.println("There is no book");
+    }
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public long getBook_ID() {
@@ -63,7 +69,7 @@ public class Book implements Comparable<Book> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return book_ID == book.book_ID ;
+        return book_ID == book.book_ID || author.getName().equals(book.author.getName()) && author.getLastname().equals(book.author.getLastname()) || name.equals(book.name);
     }
 
     @Override

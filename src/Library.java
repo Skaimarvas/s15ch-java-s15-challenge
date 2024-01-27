@@ -1,8 +1,5 @@
 import java.sql.SQLOutput;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Library {
     //Encapsulation:
@@ -11,6 +8,13 @@ public class Library {
     public Library(Map<Long, Book> availableBooks) {
         this.availableBooks = availableBooks;
         this.lentBooks = new HashMap<>();
+    }
+
+    public Map<Long, Book> getAvailableBooks() {
+        return availableBooks;
+    }
+    public Map<Long, Book> getLentBooks() {
+        return lentBooks;
     }
     public void newBook(Book book){
         availableBooks.put(book.getBook_ID(), book);
@@ -51,5 +55,23 @@ public class Library {
         }
 
         System.out.println("_______________End_____________________");
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Library library = (Library) o;
+        return Objects.equals(availableBooks, library.availableBooks) && Objects.equals(lentBooks, library.lentBooks);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(availableBooks, lentBooks);
+    }
+    @Override
+    public String toString() {
+        return "Library{" +
+                "availableBooks=" + availableBooks +
+                ", lentBooks=" + lentBooks +
+                '}';
     }
 }
