@@ -2,19 +2,19 @@ import java.util.List;
 
 public class Author extends Person{
 
-    private List<String> books;
+    private List<Book> books;
 
-    public Author(String name, String lastname, List<String> books) {
+    public Author(String name, String lastname) {
         super(name, lastname);
-        this.books = books;
+
     }
 
-    public void newBook(String book){
+    public void newBook(Book book){
         books.add(book);
     }
 
-    public void showBook(List<String> books){
-        for(String book: books){
+    public void showBook(List<Book> books){
+        for(Book book: books){
             System.out.println("Book: " + book);
         }
     }
