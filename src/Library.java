@@ -4,6 +4,7 @@ import java.util.*;
 /**Notlar
  * Kitapları sadece librarian library aracılığıyla vermeli
  * Sadece üyelere vermeli;
+ * librarian ve library aynı pakete koyulabilir mi?
  *
  *
  *
@@ -13,13 +14,21 @@ public class Library {
     private Map<Long, Book> availableBooks;
     private Map<Long, Book> lentBooks;
     private Map<Long,MemberRecord> readers;
+    private Map<Long,Librarian> librarians;
 
     public Library(Map<Long, Book> availableBooks) {
         this.availableBooks = availableBooks;
         this.lentBooks = new HashMap<>();
         this.readers = new HashMap<>();
     }
+    public void addMember(MemberRecord member){
+        if(this.readers.containsKey(member.getMemberId())){
+            System.out.println("This member is already exist");
+        } else {
+            this.readers.put(member.getMemberId(), member);
+        }
 
+    }
     public Map<Long, Book> getAvailableBooks() {
         return availableBooks;
     }

@@ -21,6 +21,10 @@ public class MemberRecord {
         this.credit = 100;
     }
 
+    public long getMemberId() {
+        return memberId;
+    }
+
     void getMember(MemberRecord member){
         System.out.println("Member ID: " + member.memberId);
         System.out.println("Member Name: " + member.name);

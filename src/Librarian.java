@@ -4,7 +4,6 @@ public class Librarian extends Person{
         super(name, lastname);
         this.password = password;
     }
-
     public Book searchBook(int bookId, String bookname,String authorname, String authorlastname, Library library){
         for(Book book: library.getAvailableBooks().values()){
             if(book.getAuthor().getName().equals(authorname) && book.getAuthor().getLastname().equals(authorlastname) || book.getBook_ID() == bookId || book.getName().equals(bookname)){
@@ -18,7 +17,7 @@ public class Librarian extends Person{
         return super.getLastname();
     }
     @Override
-    public String getName() {
+    public String getName(){
         return super.getName();
     }
     @Override
