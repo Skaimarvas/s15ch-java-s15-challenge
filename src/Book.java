@@ -42,8 +42,15 @@ public class Book implements Comparable<Book> {
     public Author getAuthor(){
         return author;
     }
-    public void changeOwner(){
+    public void changeOwner(Reader oldReader, Reader newReader, Book book){
+         oldReader.returnBook(book);
+         newReader.borrowedBooks(book);
+    }
 
+    public void getOwner(Book book, Reader reader){
+        if(reader.getBorrowedBooks().contains(book)){
+            System.out.println(book + "owner is " + reader);;
+        }
     }
 
     public double getPrice() {
@@ -61,7 +68,7 @@ public class Book implements Comparable<Book> {
     public Status getStatus() {
         return status;
     }
-    //reader oluşturduğunda getOwner methodu yaz.
+
 
 
     @Override

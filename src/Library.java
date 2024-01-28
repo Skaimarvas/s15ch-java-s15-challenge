@@ -1,13 +1,23 @@
-import java.sql.SQLOutput;
 import java.util.*;
 
+
+/**Notlar
+ * Kitapları sadece librarian library aracılığıyla vermeli
+ * Sadece üyelere vermeli;
+ *
+ *
+ *
+ */
 public class Library {
     //Encapsulation:
     private Map<Long, Book> availableBooks;
     private Map<Long, Book> lentBooks;
+    private Map<Long,MemberRecord> readers;
+
     public Library(Map<Long, Book> availableBooks) {
         this.availableBooks = availableBooks;
         this.lentBooks = new HashMap<>();
+        this.readers = new HashMap<>();
     }
 
     public Map<Long, Book> getAvailableBooks() {

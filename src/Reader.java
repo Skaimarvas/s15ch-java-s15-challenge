@@ -19,8 +19,13 @@ public class Reader extends Person {
         this.borrowedBooks = new ArrayList<>();
     }
 
+
     public void purchasedBook(Book book){
         purchasedBooks.add(book);
+    }
+
+    public List<Book> getBorrowedBooks() {
+        return borrowedBooks;
     }
 
     public void borrowedBooks(Book book){
