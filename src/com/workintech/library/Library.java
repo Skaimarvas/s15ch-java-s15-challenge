@@ -17,16 +17,36 @@ import java.util.*;
  */
 public class Library {
     //Encapsulation:
+    private String name;
     private Map<Long, Book> availableBooks;
     private Map<Long, Book> lentBooks;
     private Map<Long, MemberRecord> readers;
     private Map<Long, Librarian> librarians;
-    public Library(Map<Long, Book> availableBooks) {
+    public Library(Map<Long, Book> availableBooks, String name) {
         this.availableBooks = availableBooks;
+        this.name = name;
         this.lentBooks = new HashMap<>();
         this.readers = new HashMap<>();
+        this.librarians = new HashMap<>();
     }
-    public void addMember(MemberRecord member){
+
+    public String getName() {
+        return name;
+    }
+
+    public void addLibrarian(Librarian librarian){
+        if(this.librarians.containsKey(librarian.getLibId())){
+            System.out.println("The librarian: " + librarian.getName() + " " + librarian.getLastname() +  " is already exist");
+        } else {
+            this.librarians.put(librarian.getLibId(), librarian);
+        }
+    }
+
+    public Map<Long, Librarian> getLibrarians() {
+        return librarians;
+    }
+
+    protected void recordMember(MemberRecord member){
         if(this.readers.containsKey(member.getMemberId())){
             System.out.println("This member is already exist");
         } else {

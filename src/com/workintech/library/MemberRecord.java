@@ -1,5 +1,7 @@
 package com.workintech.library;
 
+import java.util.SortedMap;
+
 public class MemberRecord {
     private long memberId;
     private int credit;
@@ -23,6 +25,10 @@ public class MemberRecord {
         this.credit = 100;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public long getMemberId() {
         return memberId;
     }
@@ -37,7 +43,34 @@ public class MemberRecord {
         System.out.println("Member has no books issued: " + member.noBooksIssued);
     }
 
+    void incBookIssued(double d){
 
+        if(noBooksIssued < maxBookLimit){
+            payBill(d);
+            noBooksIssued+=d;
+            System.out.println("Credit(Increase Issued Books: " + credit);
 
+        } else {
+            System.out.println("The member: " + this.getName() + " reached maximum limit of the book issued ");
+        }
+
+    }
+    void decBookIssued(double d){
+        if(noBooksIssued <= maxBookLimit && d <= noBooksIssued){
+            payBill(d);
+            noBooksIssued-=d;
+            System.out.println("Credit(Decrease Issued Books: " + credit);
+
+        } else {
+            System.out.println("The member: " + this.getName() + " has no issued books");
+        }
+    }
+
+    private void payBill(double d){
+        System.out.println("Invoice: Issued Book");
+        System.out.println("Issued Book in total: " + d);
+        System.out.println("Total : " + credit);
+
+    }
 
 }

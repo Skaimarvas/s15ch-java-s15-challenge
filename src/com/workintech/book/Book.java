@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Book implements Comparable<Book> {
     private int book_ID;
+    //Composition örneği (has A relation)
     private Author author;
     private String name;
     private double price;
@@ -39,6 +40,8 @@ public class Book implements Comparable<Book> {
     public long getBook_ID() {
         return book_ID;
     }
+
+
 
     public String get_title(){
         return name;
