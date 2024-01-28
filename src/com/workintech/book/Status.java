@@ -1,3 +1,5 @@
+package com.workintech.book;
+
 public enum Status {
     AVAILABLE("Available in the library"),
     ON_LOAN("Borrowed"),

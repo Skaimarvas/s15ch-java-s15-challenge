@@ -1,4 +1,8 @@
-import java.util.Comparator;
+package com.workintech.book;
+
+import com.workintech.person.Author;
+import com.workintech.person.Reader;
+
 import java.util.Objects;
 
 public class Book implements Comparable<Book> {
@@ -87,15 +91,16 @@ public class Book implements Comparable<Book> {
     @Override
     public String toString() {
         return "Book{" +
-                "book_ID=" + book_ID +
-                ", author=" + author +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", status=" + status +
-                ", edition='" + edition + '\'' +
-                ", dateOfPurchase='" + dateOfPurchase + '\'' +
-                '}';
+                "\n  Book_ID=" + book_ID +
+                "\n  Author=" + author +
+                "\n  Name='" + name + '\'' +
+                "\n  Price=" + price +
+                "\n  Status=" + status +
+                "\n  Edition='" + edition + '\'' +
+                "\n  Date Of Purchase='" + dateOfPurchase + '\'' +
+                "\n}";
     }
+
 
     @Override
     public int compareTo(Book o) {

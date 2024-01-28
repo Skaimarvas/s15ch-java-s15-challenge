@@ -1,3 +1,5 @@
+package com.workintech.library;
+
 public class MemberRecord {
     private long memberId;
     private int credit;

@@ -1,3 +1,7 @@
+package com.workintech.person;
+
+import com.workintech.book.Book;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +11,7 @@ import java.util.List;
  */
 
 
-public class Author extends Person{
+public class Author extends Person {
 
     private List<Book> books;
 

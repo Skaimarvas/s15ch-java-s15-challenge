@@ -1,3 +1,9 @@
+package com.workintech.library;
+
+import com.workintech.book.Book;
+import com.workintech.book.Status;
+import com.workintech.person.Reader;
+
 import java.util.*;
 
 
@@ -13,9 +19,8 @@ public class Library {
     //Encapsulation:
     private Map<Long, Book> availableBooks;
     private Map<Long, Book> lentBooks;
-    private Map<Long,MemberRecord> readers;
-    private Map<Long,Librarian> librarians;
-
+    private Map<Long, MemberRecord> readers;
+    private Map<Long, Librarian> librarians;
     public Library(Map<Long, Book> availableBooks) {
         this.availableBooks = availableBooks;
         this.lentBooks = new HashMap<>();

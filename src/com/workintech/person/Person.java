@@ -1,3 +1,5 @@
+package com.workintech.person;
+
 import java.util.Objects;
 
 public abstract class Person {
@@ -34,9 +36,6 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
+        return name + " " + lastname ;
     }
 }
