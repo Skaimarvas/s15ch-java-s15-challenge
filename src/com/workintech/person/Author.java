@@ -4,6 +4,7 @@ import com.workintech.book.Book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**Notlar:
  * Author constructor'unda this.books = new ArrayList<>(); oluşturmadığım
@@ -21,8 +22,28 @@ public class Author extends Person {
 
     }
 
-    public void newBook(Book book){
-        books.add(book);
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void addNewBook(Book book){
+
+        if(!isAuthorHasBook(book)){
+            books.add(book);
+        } else {
+            System.out.println("The author: " + this.getName() + " has already book.");
+        }
+
+    }
+
+    private boolean isAuthorHasBook(Book book){
+        for(Book book1: books){
+            if (book1.getBook_ID() == book.getBook_ID()) {
+                return true;
+            }
+
+        }
+        return false;
     }
 
     public void showBook(){
@@ -39,6 +60,21 @@ public class Author extends Person {
 
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Author author = (Author) o;
+        return Objects.equals(books, author.books);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), books);
+    }
+
     @Override
     public void whoYouAre() {
         System.out.println("Person is " + getClass().getSimpleName() + ": " + getName() + " " + getLastname());
