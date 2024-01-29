@@ -29,10 +29,11 @@ public class Library {
         this.readers = new HashMap<>();
         this.librarians = new HashMap<>();
     }
-
     public String getName() {
         return name;
     }
+
+
 
     public void addLibrarian(Librarian librarian){
         if(this.librarians.containsKey(librarian.getLibId())){

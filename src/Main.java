@@ -19,7 +19,7 @@ public class Main {
         //------------------------Books-----------------------------------------
         Book flightOfTheStorks = new Book(3,jeanChristopheGrange,"Flight of the Storks",23,Status.NOT_IN_CATALOG,"2nd edition", "31-10-2016");
         Book theShining = new Book(1,stephenKings,"The Shining",20.4, Status.NOT_IN_CATALOG,"13th edition","20-01-2005");
-        Book theGreenMile = new Book(2,stephenKings,"The Green Mile",20.5,Status.NOT_IN_CATALOG,"14th edition","01-07-2000");
+        Book theGreenMile = new Book(2,stephenKings,"The Gr Mile",20.5,Status.NOT_IN_CATALOG,"14th edition","01-07-2000");
 
 
 
@@ -58,9 +58,20 @@ public class Main {
         librarian1.addMember(trinityCollegeLibrary,member1);
 
 
+        //----------------------Book-Search------------------------------------
+        System.out.println("_______________Searching_Book______________________");
+        librarian1.searchBookbyAuthorLastName("kin", trinityCollegeLibrary);
+        librarian2.searchBookbyAuthorName("jean", trinityCollegeLibrary);
+        librarian2.searchBookbyBookName("gre", trinityCollegeLibrary);
+        librarian1.searchBookbyID(2, trinityCollegeLibrary);
+
+        System.out.println("_______________Searching_Book______________________");
 
 
+        //---------------------Update-Book-Data-----------------------------------
 
+        Book newbook = new Book(2,stephenKings,"The Green Mile", 40,Status.AVAILABLE, "14th edition", "01-07-2005");
+        librarian1.updatedBookInfo(newbook,trinityCollegeLibrary);
         //----------------------Add-New-Book-To-Author--------------------------
         jeanChristopheGrange.newBook(flightOfTheStorks);
         stephenKings.newBook(theShining);
