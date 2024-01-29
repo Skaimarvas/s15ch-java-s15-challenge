@@ -29,12 +29,12 @@ public class Library {
         this.readers = new HashMap<>();
         this.librarians = new HashMap<>();
     }
+    public Map<Long, MemberRecord> getReaders() {
+        return readers;
+    }
     public String getName() {
         return name;
     }
-
-
-
     public void addLibrarian(Librarian librarian){
         if(this.librarians.containsKey(librarian.getLibId())){
             System.out.println("The librarian: " + librarian.getName() + " " + librarian.getLastname() +  " is already exist");
@@ -42,11 +42,9 @@ public class Library {
             this.librarians.put(librarian.getLibId(), librarian);
         }
     }
-
     public Map<Long, Librarian> getLibrarians() {
         return librarians;
     }
-
     protected void recordMember(MemberRecord member){
         if(this.readers.containsKey(member.getMemberId())){
             System.out.println("This member is already exist");
@@ -65,15 +63,11 @@ public class Library {
         availableBooks.put(book.getBook_ID(), book);
     }
     public void lentBook(Book book, Reader reader){
-        if(availableBooks.containsKey(book.getBook_ID())){
-
             reader.borrowedBooks(book);
+            book.changeOwner(reader);
             book.setStatus(Status.ON_LOAN);
-        }
-        if(lentBooks.containsKey(book.getBook_ID())){
-            //burada getOwner methodunu kullanacağız
-            System.out.println("This book was lent to: ");
-        }
+            availableBooks.remove(book.getBook_ID());
+            lentBooks.put(book.getBook_ID(),book);
     }
     public void takeBackBook(Book book){
         if(lentBooks.containsKey(book.getBook_ID())){

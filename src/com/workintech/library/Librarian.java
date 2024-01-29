@@ -1,20 +1,37 @@
 package com.workintech.library;
 import com.workintech.book.Book;
 import com.workintech.person.Person;
-import com.workintech.library.Library;
-
 import java.util.Iterator;
 
 
 public class Librarian extends Person {
+    private int deposit;
     private long libId;
     private String password;
     public Librarian(String name, String lastname, String password,long libId) {
         super(name, lastname);
         this.password = password;
         this.libId = libId;
+        this.deposit = 0;
     }
-
+    public void issueBook(Library library, Book book, MemberRecord memberRecord){
+        System.out.println("------------------ISSUED-BOOK-TRANSACTION----------------------");
+        //librarian kontrolü
+        // memberkontrolü
+        if(verifyLibrarian(library) && verifyMember(memberRecord,library) && library.getAvailableBooks().containsKey(book.getBook_ID())){
+                memberRecord.incBookIssued();
+                library.lentBook(book,memberRecord);
+        } else if(library.getLentBooks().containsKey(book.getBook_ID())){
+            //burada getOwner methodunu kullanacağız
+            System.out.println("This book already has been lent to: " + book.getOwner().getName());
+        }
+        System.out.println("------------------ISSUED-BOOK-TRANSACTION-END------------------");
+    }
+    public boolean verifyMember(MemberRecord memberRecord, Library library){
+        if(library.getReaders().containsKey(memberRecord.getMemberId())) return true;
+        System.out.println("The reader: " + memberRecord.getName() + " " + memberRecord.getLastname() + " is not recorded in the system of " + library.getName());
+        return false ;
+    }
     public void updatedBookInfo(Book newbook, Library library){
         //Başta Iterator kullanmadığım için Concurrent hatası aldım.
         Iterator<Book> iterator = library.getAvailableBooks().values().iterator();
@@ -84,6 +101,14 @@ public class Librarian extends Person {
     @Override
     public String getName(){
         return super.getName();
+    }
+
+    //Bu method library içinde olmalı
+    public boolean verifyLibrarian(Library library){
+        if(library.getLibrarians().containsKey(this.getLibId())) return true;
+
+        System.out.println("This librarian: " + this.getName() + " has not permisson in " + library.getName());
+        return false;
     }
     public long getLibId() {
         return libId;
