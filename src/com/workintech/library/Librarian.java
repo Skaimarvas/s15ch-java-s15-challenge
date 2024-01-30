@@ -1,6 +1,9 @@
 package com.workintech.library;
 import com.workintech.book.Book;
+import com.workintech.book.Status;
 import com.workintech.person.Person;
+import com.workintech.person.Reader;
+
 import java.util.Iterator;
 
 
@@ -18,9 +21,23 @@ public class Librarian extends Person {
         System.out.println("------------------ISSUED-BOOK-TRANSACTION----------------------");
         //librarian kontrolü
         // memberkontrolü
-        if(verifyLibrarian(library) && verifyMember(memberRecord,library) && library.getAvailableBooks().containsKey(book.getBook_ID())){
+        if(library.verifyLibrarian(this) && verifyMember(memberRecord,library) && library.getAvailableBooks().containsKey(book.getBook_ID())){
                 memberRecord.incBookIssued();
                 library.lentBook(book,memberRecord);
+                createBill(memberRecord,book);
+        } else if(library.getLentBooks().containsKey(book.getBook_ID())){
+            //burada getOwner methodunu kullanacağız
+            System.out.println("This book already has been lent to: " + book.getOwner().getName());
+        }
+        System.out.println("------------------ISSUED-BOOK-TRANSACTION-END------------------");
+    }
+    public void takeIssueBook(Library library, Book book, MemberRecord memberRecord){
+        System.out.println("------------------ISSUED-BOOK-TRANSACTION----------------------");
+        //librarian kontrolü
+        // memberkontrolü
+        if(library.verifyLibrarian(this) && verifyMember(memberRecord,library) && !library.isBookAvailable(book) && library.isBookLent(book)){
+            memberRecord.decBookIssued();
+            library.takeBackBook(book, memberRecord);
         } else if(library.getLentBooks().containsKey(book.getBook_ID())){
             //burada getOwner methodunu kullanacağız
             System.out.println("This book already has been lent to: " + book.getOwner().getName());
@@ -94,6 +111,19 @@ public class Librarian extends Person {
             System.out.println("New member: " + memberRecord.getName() + " was saved on the system of " + library.getName());
         }
     }
+    public void createBill(MemberRecord member, Book book){
+        System.out.println("----------------------------");
+        System.out.println("Invoice:");
+        System.out.println("Username: " + member.getName());
+        System.out.println("Book ID: " + book.getBook_ID());
+        System.out.println("Book Name: " + book.getName());
+        System.out.println("Author: " + book.getAuthor());
+        System.out.println("Member Credit: " + member.getCredit());
+        System.out.println("Price: 25");
+        member.payBill();
+        System.out.println("Member Balance (After Transaction) : " + member.getCredit());
+        System.out.println("----------------------------");
+    }
     @Override
     public String getLastname() {
         return super.getLastname();
@@ -101,14 +131,6 @@ public class Librarian extends Person {
     @Override
     public String getName(){
         return super.getName();
-    }
-
-    //Bu method library içinde olmalı
-    public boolean verifyLibrarian(Library library){
-        if(library.getLibrarians().containsKey(this.getLibId())) return true;
-
-        System.out.println("This librarian: " + this.getName() + " has not permisson in " + library.getName());
-        return false;
     }
     public long getLibId() {
         return libId;
