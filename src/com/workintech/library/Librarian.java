@@ -148,10 +148,11 @@ public class Librarian extends Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Librarian librarian = (Librarian) o;
-        return Objects.equals(this.getName(), librarian.getName()) || Objects.equals(this.getLastname(), librarian.getLastname()) || Objects.equals(this.getPassword(), librarian.getPassword());
-
+        return deposit == librarian.deposit && libId == librarian.libId && Objects.equals(password, librarian.password);
     }
+
     @Override
     public int hashCode() {
         return super.hashCode();
