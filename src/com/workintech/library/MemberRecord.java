@@ -2,6 +2,7 @@ package com.workintech.library;
 
 import com.workintech.person.Reader;
 
+import java.util.Objects;
 import java.util.SortedMap;
 
 public class MemberRecord extends Reader {
@@ -27,11 +28,9 @@ public class MemberRecord extends Reader {
         this.address = address;
         this.phoneNo = phoneNo;
     }
-
     public int getCredit() {
         return credit;
     }
-
     public String getName() {
         return super.getName();
     }
@@ -67,8 +66,21 @@ public class MemberRecord extends Reader {
             System.out.println("The member: " + this.getName() + " has no issued books");
         }
     }
-     void payBill(){
+    void payBill(){
         if(credit>0) credit -=25;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        MemberRecord that = (MemberRecord) o;
+        return memberId == that.memberId && credit == that.credit && noBooksIssued == that.noBooksIssued && maxBookLimit == that.maxBookLimit && type == that.type && Objects.equals(dateOfMembership, that.dateOfMembership) && Objects.equals(address, that.address) && Objects.equals(phoneNo, that.phoneNo) && Objects.equals(reader, that.reader);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), memberId, credit, type, dateOfMembership, noBooksIssued, maxBookLimit, address, phoneNo, reader);
+    }
 }
