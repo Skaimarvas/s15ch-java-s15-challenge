@@ -151,11 +151,7 @@ public class Librarian extends Person {
         Librarian librarian = (Librarian) o;
         return Objects.equals(this.getName(), librarian.getName()) || Objects.equals(this.getLastname(), librarian.getLastname()) || Objects.equals(this.getPassword(), librarian.getPassword());
 
-
     }
-
-    @Override
-
     @Override
     public int hashCode() {
         return super.hashCode();
