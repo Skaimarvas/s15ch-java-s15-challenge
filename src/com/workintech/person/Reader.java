@@ -39,9 +39,12 @@ public class Reader extends Person {
     public void returnBook(Book book){
         if(borrowedBooks.contains(book)){
             borrowedBooks.remove(book);
-            System.out.println( book +  "was returned to Library");
+            System.out.println( book.getName() +  " was returned to Library");
+        } else {
+            System.out.println( book.getName() + " was not borrowed from the Library");
         }
-        System.out.println( book + " was not borrowed from the Library");
+
+
 
     }
 
