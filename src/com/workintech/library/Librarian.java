@@ -5,6 +5,7 @@ import com.workintech.person.Person;
 import com.workintech.person.Reader;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 
 public class Librarian extends Person {
@@ -142,10 +143,19 @@ public class Librarian extends Person {
     public void whoYouAre() {
         System.out.println("Person is " + getClass().getSimpleName() + ": " + getName() + " " + getLastname());
     }
+
     @Override
     public boolean equals(Object o) {
-        return super.equals(o);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Librarian librarian = (Librarian) o;
+        return Objects.equals(this.getName(), librarian.getName()) || Objects.equals(this.getLastname(), librarian.getLastname()) || Objects.equals(this.getPassword(), librarian.getPassword());
+
+
     }
+
+    @Override
+
     @Override
     public int hashCode() {
         return super.hashCode();
