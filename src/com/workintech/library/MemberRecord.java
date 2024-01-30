@@ -28,6 +28,10 @@ public class MemberRecord extends Reader {
         this.phoneNo = phoneNo;
     }
 
+    public int getCredit() {
+        return credit;
+    }
+
     public String getName() {
         return super.getName();
     }
@@ -63,10 +67,8 @@ public class MemberRecord extends Reader {
             System.out.println("The member: " + this.getName() + " has no issued books");
         }
     }
-    private void payBill(){
+     void payBill(){
         if(credit>0) credit -=25;
-        System.out.println("Invoice: Issued Book");
-        System.out.println("Issued Book in total: " + 25);
     }
 
 }
