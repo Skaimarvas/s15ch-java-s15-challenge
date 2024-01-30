@@ -22,8 +22,8 @@ public class Library {
     private Map<Long, Book> lentBooks;
     private Map<Long, MemberRecord> readers;
     private Map<Long, Librarian> librarians;
-    public Library(Map<Long, Book> availableBooks, String name) {
-        this.availableBooks = availableBooks;
+    public Library(String name) {
+        this.availableBooks = new HashMap<>();
         this.name = name;
         this.lentBooks = new HashMap<>();
         this.readers = new HashMap<>();
@@ -35,12 +35,38 @@ public class Library {
     public String getName() {
         return name;
     }
+    public boolean verifyLibrarian(Librarian librarian){
+        if(this.getLibrarians().containsKey(librarian.getLibId())) return true;
+
+        System.out.println("This librarian: " + this.getName() + " has not permisson in " + this.getName());
+        return false;
+    }
     public void addLibrarian(Librarian librarian){
         if(this.librarians.containsKey(librarian.getLibId())){
             System.out.println("The librarian: " + librarian.getName() + " " + librarian.getLastname() +  " is already exist");
         } else {
             this.librarians.put(librarian.getLibId(), librarian);
         }
+    }
+
+    protected boolean isBookAvailable(Book book){
+        if(this.getAvailableBooks().containsKey(book.getBook_ID())){
+
+            System.out.println("the book: " + book.getName() + " is already exist");
+            return true;
+        };
+        return false;
+    }
+    protected boolean isBookLent(Book book){
+        if(this.getLentBooks().containsKey(book.getBook_ID())) {
+            System.out.println("the book: " + book.getName() + " is already exist");
+            return true;
+        };
+        return false;
+    }
+    protected boolean isBookExist (Book book){
+        if(isBookAvailable(book) && isBookLent(book)) return true;
+        return false;
     }
     public Map<Long, Librarian> getLibrarians() {
         return librarians;
@@ -60,7 +86,10 @@ public class Library {
         return lentBooks;
     }
     public void newBook(Book book){
-        availableBooks.put(book.getBook_ID(), book);
+       if(!isBookExist(book) ){
+           book.setStatus(Status.AVAILABLE);
+           availableBooks.put(book.getBook_ID(), book);
+       };
     }
     public void lentBook(Book book, Reader reader){
             reader.borrowedBooks(book);
@@ -69,12 +98,12 @@ public class Library {
             availableBooks.remove(book.getBook_ID());
             lentBooks.put(book.getBook_ID(),book);
     }
-    public void takeBackBook(Book book){
-        if(lentBooks.containsKey(book.getBook_ID())){
-            availableBooks.put(book.getBook_ID(), book);
-        }
-        System.out.println("This book has not been lent out from the library.");
-    }
+    public void takeBackBook(Book book, Reader reader){
+        reader.returnBook(book);
+        availableBooks.put(book.getBook_ID(), book);
+        lentBooks.remove(book.getBook_ID());
+
+}
     public void showBook(){
         System.out.println("________________Available_Books_____________");
         if(!availableBooks.isEmpty()){
