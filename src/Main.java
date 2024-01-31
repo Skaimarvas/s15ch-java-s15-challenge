@@ -9,13 +9,14 @@ import com.workintech.person.Person;
 import com.workintech.person.Reader;
 import java.util.*;
 
-/**
+/**Notlar
  * Tekrar tekrar oluşturmamak için Library ve Librarian objelerini main class içinde,
  * static olarak oluşturdum.
  */
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Librarian> librarianList = new ArrayList<>();
+    //Hard dependency?
     private static Library trinityCollegeLibrary = new Library("Trinity College Library");
 
     private static Librarian librarian1 = new Librarian("Volkan","Konak","asd123", 1);
@@ -190,6 +191,9 @@ public class Main {
                 case 3:
                     searchBookById();
                     break;
+                case 4:
+                    searchBookByName();
+                    break;
                 case 5:
                     searchBookByAuthor();
                     break;
@@ -281,14 +285,19 @@ public class Main {
     public static void searchBookByAuthor(){
         String authorname;
         String authorlastname;
+        scanner.nextLine();
         System.out.println("Please enter author name: ");
         authorname = scanner.nextLine();
-        scanner.nextLine();
         System.out.println("Please enter author lastname: ");
         authorlastname = scanner.nextLine();
         librarian1.searchBookbyAuthorName(authorname, trinityCollegeLibrary);
         librarian1.searchBookbyAuthorLastName(authorlastname,trinityCollegeLibrary);
-
-
+    }
+    public static void searchBookByName(){
+        String bookName;
+        scanner.nextLine();
+        System.out.println("Please enter book name: ");
+        bookName = scanner.nextLine();
+        librarian1.searchBookbyBookName(bookName,trinityCollegeLibrary);
     }
 }
