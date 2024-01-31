@@ -183,6 +183,12 @@ public class Main {
                 case 1:
                     addBook();
                     break;
+                case 2:
+                    removeBook();
+                    break;
+                case 3:
+                    searchBookById();
+                    break;
                 case 0:
                     System.out.println("Exiting the system. Goodbye!");
                     break;
@@ -194,8 +200,17 @@ public class Main {
     }
     public static void addBook(){
         System.out.println("Please enter book information");
-        System.out.println("Book ID: ");
-        int bookId = scanner.nextInt();
+        int bookId ;
+        while (true){
+            System.out.println("Book ID: ");
+            if(scanner.hasNextInt()){
+                bookId = scanner.nextInt();
+                break;
+            } else {
+                System.out.println("Invalid input. Please try again");
+                scanner.nextLine();
+            }
+        }
         scanner.nextLine();
         System.out.println("Book Name: ");
         String bookName = scanner.nextLine();
@@ -203,8 +218,17 @@ public class Main {
         String authorName = scanner.nextLine();
         System.out.println("Author Lastname: ");
         String authorLastname = scanner.nextLine();
-        System.out.println("Book Price: ");
-        int bookPrice = scanner.nextInt();
+        int bookPrice;
+        while (true){
+            System.out.println("Book Price: ");
+            if(scanner.hasNextInt()){
+                bookPrice = scanner.nextInt();
+                break;
+            } else {
+                System.out.println("Invalid input. Please try again");
+                scanner.nextLine();
+            }
+        }
         Status status = Status.AVAILABLE;
         System.out.println("Book Edition: ");
         scanner.nextLine();
@@ -214,7 +238,39 @@ public class Main {
         Author author = new Author(authorName,authorLastname);
         Book newBook = new Book(bookId,author,bookName,bookPrice,status,edition,dateOfPurchase);
         System.out.println("Book added succesfully!");
+        trinityCollegeLibrary.newBook(newBook);
         System.out.println(trinityCollegeLibrary.getAvailableBooks());
         System.out.println(trinityCollegeLibrary.getLentBooks());
     };
+    public static void removeBook(){
+        int bookId;
+        System.out.println("Please enter the book id that you want to remove");
+        while (true){
+            if(scanner.hasNextInt()){
+                bookId = scanner.nextInt();
+                Book removedBook = trinityCollegeLibrary.getBookById(bookId);
+                trinityCollegeLibrary.removeBook(removedBook);
+                trinityCollegeLibrary.showBook();
+                break;
+
+            } else {
+                System.out.println("Invalid Book ID. Please try again");
+            }
+
+        }
+
+    }
+    public static void searchBookById(){
+       int bookId;
+        System.out.println("Please enter the book id that you want to search");
+        while (true){
+            if (scanner.hasNextInt()){
+                bookId = scanner.nextInt();
+                librarian1.searchBookbyID(bookId,trinityCollegeLibrary);
+                break;
+            } else {
+                System.out.println("Invalid book id. Please try again");
+            }
+        }
+    }
 }

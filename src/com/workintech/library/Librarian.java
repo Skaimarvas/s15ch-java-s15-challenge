@@ -73,7 +73,11 @@ public class Librarian extends Person {
         for(Book book: library.getAvailableBooks().values()){
             if( book.getBook_ID() == bookId ){
                 System.out.println("Book: " + book);
+                break;
+            } else {
+                System.out.println("No result for the id: " + bookId);
             }
+
         };
         System.out.println("Search Result End for: " + bookId);
     }
@@ -143,7 +147,6 @@ public class Librarian extends Person {
     public void whoYouAre() {
         System.out.println("Person is " + getClass().getSimpleName() + ": " + getName() + " " + getLastname());
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -152,7 +155,6 @@ public class Librarian extends Person {
         Librarian librarian = (Librarian) o;
         return deposit == librarian.deposit && libId == librarian.libId && Objects.equals(password, librarian.password);
     }
-
     @Override
     public int hashCode() {
         return super.hashCode();

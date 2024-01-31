@@ -48,7 +48,6 @@ public class Library {
             this.librarians.put(librarian.getLibId(), librarian);
         }
     }
-
     protected boolean isBookAvailable(Book book){
         if(this.getAvailableBooks().containsKey(book.getBook_ID())){
 
@@ -91,6 +90,22 @@ public class Library {
            availableBooks.put(book.getBook_ID(), book);
        };
     }
+    public Book getBookById (int id){
+        for (Book book: this.getAvailableBooks().values()){
+            if (book.getBook_ID() == id) {
+                return book;
+            }
+        }
+        return null;
+    }
+    public void removeBook(Book book){
+        if(isBookExist(book)){
+            book.setStatus(Status.NOT_IN_CATALOG);
+            this.availableBooks.remove(book.getBook_ID());
+            System.out.println("The book:" + book.getName() + "was succesfully deleted on the system ");
+            book.changeOwner(new Reader(null,null));
+        }
+    }
     public void lentBook(Book book, Reader reader){
             reader.borrowedBooks(book);
             book.changeOwner(reader);
@@ -108,7 +123,7 @@ public class Library {
         System.out.println("________________Available_Books_____________");
         if(!availableBooks.isEmpty()){
             for(Book book: availableBooks.values()){
-                System.out.println("Book: " + book);
+                System.out.println(book);
             }
         } else {
             System.out.println("There are no available books");
@@ -116,7 +131,7 @@ public class Library {
         System.out.println("_______________Lent_Books______________");
         if(!lentBooks.isEmpty()){
             for (Book book: lentBooks.values()){
-                System.out.println("Book: " + book);
+                System.out.println(book);
             }
         } else {
             System.out.println("All books are available now");
