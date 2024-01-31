@@ -197,7 +197,12 @@ public class Main {
                 case 5:
                     searchBookByAuthor();
                     break;
-
+                case 6:
+                    listBookByAuthor();
+                    break;
+                case 7:
+                    listAllBooks();
+                    break;
                 case 0:
                     System.out.println("Exiting the system. Goodbye!");
                     break;
@@ -292,6 +297,20 @@ public class Main {
         authorlastname = scanner.nextLine();
         librarian1.searchBookbyAuthorName(authorname, trinityCollegeLibrary);
         librarian1.searchBookbyAuthorLastName(authorlastname,trinityCollegeLibrary);
+    }
+    public static void listBookByAuthor(){
+        String authorname;
+        String authorlastname;
+        scanner.nextLine();
+        System.out.println("Please enter author name: ");
+        authorname = scanner.nextLine();
+        System.out.println("Please enter author lastname: ");
+        authorlastname = scanner.nextLine();
+        librarian1.searchBookbyAuthorName(authorname, trinityCollegeLibrary);
+        librarian1.searchBookbyAuthorLastName(authorlastname,trinityCollegeLibrary);
+    }
+    public static void listAllBooks(){
+        trinityCollegeLibrary.showBook();
     }
     public static void searchBookByName(){
         String bookName;

@@ -93,7 +93,7 @@ public class Librarian extends Person {
     public void searchBookbyAuthorName(String authorname, Library library){
         System.out.println("Search Result for name: " + authorname );
         for(Book book: library.getAvailableBooks().values()){
-            if( book.getAuthor().getName().toLowerCase().contains(authorname)){
+            if( book.getAuthor().getName().toLowerCase().contains(authorname.toLowerCase())){
                 System.out.println("Book: " + book);
             }
         };
@@ -102,7 +102,7 @@ public class Librarian extends Person {
     public void searchBookbyAuthorLastName(String authorlastname, Library library){
         System.out.println("Searching Result for lastname: " + authorlastname );
         for(Book book: library.getAvailableBooks().values()){
-            if( book.getAuthor().getLastname().toLowerCase().contains(authorlastname)){
+            if( book.getAuthor().getLastname().toLowerCase().contains(authorlastname.toLowerCase())){
                 System.out.println("Book: " + book);
             }
         };
