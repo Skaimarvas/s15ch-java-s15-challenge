@@ -12,30 +12,22 @@ import java.util.Objects;
  */
 
 public class Reader extends Person {
-
     private List<Book> purchasedBooks;
     private List<Book> borrowedBooks;
-
     public Reader(String name, String lastname) {
         super(name, lastname);
         this.purchasedBooks = new ArrayList<>();
         this.borrowedBooks = new ArrayList<>();
     }
-
-
     public void purchasedBook(Book book){
         purchasedBooks.add(book);
     }
-
     public List<Book> getBorrowedBooks() {
         return borrowedBooks;
     }
-
     public void borrowedBooks(Book book){
         borrowedBooks.add(book);
     }
-
-
     public void returnBook(Book book){
         if(borrowedBooks.contains(book)){
             borrowedBooks.remove(book);
@@ -47,7 +39,6 @@ public class Reader extends Person {
 
 
     }
-
     public void showBook(){
         System.out.println("_________Purchased_Book______________");
         if(!purchasedBooks.isEmpty()){
@@ -72,7 +63,6 @@ public class Reader extends Person {
     public void whoYouAre() {
         System.out.println("Person is " + getClass().getSimpleName() + ": " + getName() + " " + getLastname());
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,12 +71,10 @@ public class Reader extends Person {
         Reader reader = (Reader) o;
         return Objects.equals(purchasedBooks, reader.purchasedBooks) && Objects.equals(borrowedBooks, reader.borrowedBooks);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), purchasedBooks, borrowedBooks);
     }
-
     @Override
     public String toString() {
         return "Reader{" +

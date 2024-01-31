@@ -12,13 +12,14 @@ import java.util.*;
 /**Notlar
  * Tekrar tekrar oluşturmamak için Library ve Librarian objelerini main class içinde,
  * static olarak oluşturdum.
+ * Category için enum oluşturulabilir.
  */
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
-    private static List<Librarian> librarianList = new ArrayList<>();
+    private static Set<Librarian> librarianList = new HashSet<>();
+
     //Hard dependency?
     private static Library trinityCollegeLibrary = new Library("Trinity College Library");
-
     private static Librarian librarian1 = new Librarian("Volkan","Konak","asd123", 1);
     private static Librarian librarian2 = new Librarian("Dilber","Ay", "123zor",2);
     private static Librarian librarian3 = new Librarian("Mustafa", "Keser","dil123",3);
@@ -59,9 +60,13 @@ public class Main {
         jKRowling.addNewBook(harryPotterThePS);
         ursulaKLeGuin.addNewBook(talesFromEarthsea);
         System.out.println("----------------Show-Book--------------------------");
+        System.out.println("----------------Ursula-K-LeGuin---------------------");
         ursulaKLeGuin.showBook();
+        System.out.println("----------------John-Fowles------------------------");
         johnFowles.showBook();
+        System.out.println("----------------Jean-ChristopheGrange---------------");
         jeanChristopheGrange.showBook();
+        System.out.println("----------------Stephen-King-----------------------");
         stephenKings.showBook();
         System.out.println("----------------Show-Book-End-------------------------");
         //-----------------------Library----------------------------------------
@@ -90,16 +95,15 @@ public class Main {
         librarian3.addMember(trinityCollegeLibrary,member1);
         librarian1.addMember(trinityCollegeLibrary,member1);
 
-         /*
+
         //----------------------Book-Search------------------------------------
         System.out.println("_______________Searching_Book______________________");
         librarian1.searchBookbyAuthorLastName("kin", trinityCollegeLibrary);
-        librarian2.searchBookbyAuthorName("jean", trinityCollegeLibrary);
-        librarian2.searchBookbyBookName("gre", trinityCollegeLibrary);
+        librarian1.searchBookbyAuthorName("Jea", trinityCollegeLibrary);
+        librarian1.searchBookbyBookName("sto", trinityCollegeLibrary);
         librarian1.searchBookbyID(2, trinityCollegeLibrary);
 
         System.out.println("_______________Searching_Book______________________");
-        */
 
         //---------------------Update-Book-Data-----------------------------------
 
@@ -107,17 +111,17 @@ public class Main {
         librarian1.updatedBookInfo(newbook,trinityCollegeLibrary);
 
         //---------------------Issue-Book---------------------------------------
-
+        System.out.println("--------------------ISSUE-BOOK--------------------------------------------------");
         Reader natalie = new Reader("Natalie", "Portman");
         MemberRecord member2 = new MemberRecord(natalie,2,MemberType.STUDENT,"12-02-2021","France","222-222-22-22");
         librarian1.addMember(trinityCollegeLibrary,member2);
-        librarian1.issueBook(trinityCollegeLibrary,theGreenMile,member1);
-        librarian2.issueBook(trinityCollegeLibrary,theGreenMile,member2);
-
+        librarian1.issueBook(trinityCollegeLibrary,newbook,member1);
+        librarian2.issueBook(trinityCollegeLibrary,newbook,member2);
+        System.out.println("--------------------ISSUE-BOOK-END-------------------------------------------------");
 
         //-------------------Take-Back-Book------------------------------------
         System.out.println("------------Take-Back-Book---------------------");
-        librarian1.takeIssueBook(trinityCollegeLibrary,theGreenMile,member1);
+        librarian1.takeIssueBook(trinityCollegeLibrary,newbook,member1);
         System.out.println("------------Take-Back-Book---------------------");
 
         //Runtime Polymorphism

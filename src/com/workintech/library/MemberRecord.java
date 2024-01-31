@@ -1,9 +1,6 @@
 package com.workintech.library;
-
 import com.workintech.person.Reader;
-
 import java.util.Objects;
-import java.util.SortedMap;
 
 public class MemberRecord extends Reader {
     private long memberId;
@@ -48,7 +45,6 @@ public class MemberRecord extends Reader {
     }
     void incBookIssued(){
         if(noBooksIssued < maxBookLimit ){
-            payBill();
             noBooksIssued+=1;
             System.out.println("Balance Credit: " + credit);
         } else {
@@ -57,19 +53,18 @@ public class MemberRecord extends Reader {
 
     }
     void decBookIssued(){
-        if(noBooksIssued <= maxBookLimit){
-            credit += 25;
+        if(noBooksIssued <= maxBookLimit && noBooksIssued >= 0){
+            credit += 20;
             noBooksIssued-=1;
-            System.out.println("Credit(Decrease Issued Books: " + credit);
+            System.out.println("Balance Credit: " + credit);
 
         } else {
             System.out.println("The member: " + this.getName() + " has no issued books");
         }
     }
     void payBill(){
-        if(credit>0) credit -=25;
+        if(credit>0) credit -=20;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

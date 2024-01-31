@@ -5,18 +5,19 @@ import com.workintech.person.Person;
 import com.workintech.person.Reader;
 
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Objects;
 
 
 public class Librarian extends Person {
-    private int deposit;
+
     private long libId;
     private String password;
     public Librarian(String name, String lastname, String password,long libId) {
         super(name, lastname);
         this.password = password;
         this.libId = libId;
-        this.deposit = 0;
+
     }
     public void issueBook(Library library, Book book, MemberRecord memberRecord){
         System.out.println("------------------ISSUED-BOOK-TRANSACTION----------------------");
@@ -74,8 +75,13 @@ public class Librarian extends Person {
             if( book.getBook_ID() == bookId ){
                 System.out.println("Book: " + book);
                 break;
-            } else {
-                System.out.println("No result for the id: " + bookId);
+            }
+
+        };
+        for(Book book: library.getLentBooks().values()){
+            if( book.getBook_ID() == bookId ){
+                System.out.println("Book: " + book);
+                break;
             }
 
         };
@@ -84,7 +90,12 @@ public class Librarian extends Person {
     public void searchBookbyBookName(String bookname, Library library){
         System.out.println("Search Result for: " + bookname );
         for(Book book: library.getAvailableBooks().values()){
-            if( book.getName().toLowerCase().toLowerCase().contains(bookname)){
+            if( book.getName().toLowerCase().contains(bookname.toLowerCase())){
+                System.out.println("Book: " + book);
+            }
+        };
+        for(Book book: library.getLentBooks().values()){
+            if( book.getName().toLowerCase().contains(bookname.toLowerCase())){
                 System.out.println("Book: " + book);
             }
         };
@@ -92,8 +103,14 @@ public class Librarian extends Person {
     }
     public void searchBookbyAuthorName(String authorname, Library library){
         System.out.println("Search Result for name: " + authorname );
+        String lowerAuthorName = authorname.toLowerCase(Locale.ENGLISH);
         for(Book book: library.getAvailableBooks().values()){
-            if( book.getAuthor().getName().toLowerCase().contains(authorname.toLowerCase())){
+            if( book.getAuthor().getName().toLowerCase(Locale.ENGLISH).contains(lowerAuthorName)){
+                System.out.println("Book: " + book);
+            }
+        };
+        for(Book book: library.getLentBooks().values()){
+            if( book.getAuthor().getName().toLowerCase(Locale.ENGLISH).contains(lowerAuthorName)){
                 System.out.println("Book: " + book);
             }
         };
@@ -101,13 +118,14 @@ public class Librarian extends Person {
     }
     public void searchBookbyAuthorLastName(String authorlastname, Library library){
         System.out.println("Searching Result for lastname: " + authorlastname );
+        String lowerAuthorLastname = authorlastname;
         for(Book book: library.getAvailableBooks().values()){
-            if( book.getAuthor().getLastname().toLowerCase().contains(authorlastname.toLowerCase())){
+            if( book.getAuthor().getLastname().toLowerCase(Locale.ENGLISH).contains(lowerAuthorLastname)){
                 System.out.println("Book: " + book);
             }
         };
         for (Book book: library.getLentBooks().values()){
-            if( book.getAuthor().getLastname().toLowerCase().contains(authorlastname));
+            if( book.getAuthor().getLastname().toLowerCase(Locale.ENGLISH).contains(lowerAuthorLastname));
 
         }
         System.out.println("Search Result End for lastname: " + authorlastname);
@@ -128,7 +146,7 @@ public class Librarian extends Person {
         System.out.println("Book Name: " + book.getName());
         System.out.println("Author: " + book.getAuthor());
         System.out.println("Member Credit: " + member.getCredit());
-        System.out.println("Price: 25");
+        System.out.println("Price: 20");
         member.payBill();
         System.out.println("Member Balance (After Transaction) : " + member.getCredit());
         System.out.println("----------------------------");
@@ -157,14 +175,17 @@ public class Librarian extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Librarian librarian = (Librarian) o;
-        return deposit == librarian.deposit && libId == librarian.libId && Objects.equals(password, librarian.password);
+        return  libId == librarian.libId && Objects.equals(password, librarian.password);
     }
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(libId);
     }
     @Override
     public String toString() {
-        return super.toString();
+        return "Librarian{" +
+                "libId=" + libId +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
