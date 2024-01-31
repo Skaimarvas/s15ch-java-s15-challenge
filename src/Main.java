@@ -17,6 +17,7 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static List<Librarian> librarianList = new ArrayList<>();
     private static Library trinityCollegeLibrary = new Library("Trinity College Library");
+
     private static Librarian librarian1 = new Librarian("Volkan","Konak","asd123", 1);
     private static Librarian librarian2 = new Librarian("Dilber","Ay", "123zor",2);
     private static Librarian librarian3 = new Librarian("Mustafa", "Keser","dil123",3);
@@ -189,6 +190,10 @@ public class Main {
                 case 3:
                     searchBookById();
                     break;
+                case 5:
+                    searchBookByAuthor();
+                    break;
+
                 case 0:
                     System.out.println("Exiting the system. Goodbye!");
                     break;
@@ -272,5 +277,18 @@ public class Main {
                 System.out.println("Invalid book id. Please try again");
             }
         }
+    }
+    public static void searchBookByAuthor(){
+        String authorname;
+        String authorlastname;
+        System.out.println("Please enter author name: ");
+        authorname = scanner.nextLine();
+        scanner.nextLine();
+        System.out.println("Please enter author lastname: ");
+        authorlastname = scanner.nextLine();
+        librarian1.searchBookbyAuthorName(authorname, trinityCollegeLibrary);
+        librarian1.searchBookbyAuthorLastName(authorlastname,trinityCollegeLibrary);
+
+
     }
 }

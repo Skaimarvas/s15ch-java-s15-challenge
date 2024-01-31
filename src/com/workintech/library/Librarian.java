@@ -91,22 +91,26 @@ public class Librarian extends Person {
         System.out.println("Search Result End for: " + bookname);
     }
     public void searchBookbyAuthorName(String authorname, Library library){
-        System.out.println("Search Result for: " + authorname );
+        System.out.println("Search Result for name: " + authorname );
         for(Book book: library.getAvailableBooks().values()){
             if( book.getAuthor().getName().toLowerCase().contains(authorname)){
                 System.out.println("Book: " + book);
             }
         };
-        System.out.println("Search Result End for: " + authorname);
+        System.out.println("Search Result End for name : " + authorname);
     }
     public void searchBookbyAuthorLastName(String authorlastname, Library library){
-        System.out.println("Searching Result for: " + authorlastname );
+        System.out.println("Searching Result for lastname: " + authorlastname );
         for(Book book: library.getAvailableBooks().values()){
             if( book.getAuthor().getLastname().toLowerCase().contains(authorlastname)){
                 System.out.println("Book: " + book);
             }
         };
-        System.out.println("Search Result End for: " + authorlastname);
+        for (Book book: library.getLentBooks().values()){
+            if( book.getAuthor().getLastname().toLowerCase().contains(authorlastname));
+
+        }
+        System.out.println("Search Result End for lastname: " + authorlastname);
     }
     public void addMember(Library library, MemberRecord memberRecord){
         if(!library.getLibrarians().containsKey(this.getLibId())){
