@@ -73,7 +73,7 @@ public class Book implements Comparable<Book> {
     }
     @Override
     public int hashCode() {
-        return Objects.hash(book_ID, author, name, price, status, edition, dateOfPurchase);
+        return Objects.hash(book_ID);
     }
     @Override
     public String toString() {
